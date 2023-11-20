@@ -111,7 +111,6 @@ RUN pip install gymnasium gymnasium-robotics mujoco minari
 
 RUN pip install torchmetrics==0.11.4
 
-
 RUN apt-get update && apt-get install -y apt-file software-properties-common
 RUN add-apt-repository -y ppa:ubuntu-toolchain-r/test
 RUN apt-get update && apt-get install -y gcc-9 g++-9 && \
@@ -119,23 +118,23 @@ RUN apt-get update && apt-get install -y gcc-9 g++-9 && \
 RUN apt-get update && apt-get install -y libzmq5 libzmq3-dev libprotobuf-dev protobuf-compiler pkg-config
 
 ### ns3-gym
-# ENV WORKSPACE=/usr/local/ns3_workspace
-# RUN mkdir -p ${WORKSPACE}
-# RUN cd ${WORKSPACE} && \
-#     wget https://www.nsnam.org/release/ns-allinone-3.40.tar.bz2 && \
-#     tar xjf ns-allinone-3.40.tar.bz2 
+ENV WORKSPACE=/usr/local/ns3_workspace
+RUN mkdir -p ${WORKSPACE}
+RUN cd ${WORKSPACE} && \
+    wget https://www.nsnam.org/release/ns-allinone-3.40.tar.bz2 && \
+    tar xjf ns-allinone-3.40.tar.bz2 
     # (download
-# RUN cd ${WORKSPACE}/ns-allinone-3.40/ns-3.40/contrib && \
-#     git clone https://github.com/tkn-tub/ns3-gym.git ./opengym && \
-#     cd ${WORKSPACE}/ns-allinone-3.40/ns-3.40/contrib/opengym/ && \
-#     git checkout app-ns-3.36+
+RUN cd ${WORKSPACE}/ns-allinone-3.40/ns-3.40/contrib && \
+    git clone https://github.com/tkn-tub/ns3-gym.git ./opengym && \
+    cd ${WORKSPACE}/ns-allinone-3.40/ns-3.40/contrib/opengym/ && \
+    git checkout app-ns-3.36+
     # (setup gym folder (need to to build ns3)
-# RUN cd ${WORKSPACE}/ns-allinone-3.40/ns-3.40 && \
-#     ./ns3 clean && ./ns3 configure --enable-examples && ./ns3 build
-#     # (build ns3
-# RUN cd ${WORKSPACE}/ns-allinone-3.40/ns-3.40/contrib/opengym/ && \
-#     pip3 install --user ./model/ns3gym
-#     # (build opengym
+RUN cd ${WORKSPACE}/ns-allinone-3.40/ns-3.40 && \
+    ./ns3 clean && ./ns3 configure --enable-examples && ./ns3 build
+    # (build ns3
+RUN cd ${WORKSPACE}/ns-allinone-3.40/ns-3.40/contrib/opengym/ && \
+    pip3 install --user ./model/ns3gym
+    # (build opengym
 
 ## Non-root user creation and enter
 ARG USER_UID=1000
