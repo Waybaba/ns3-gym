@@ -117,7 +117,7 @@ RUN apt-get update && apt-get install -y gcc-8 g++-8 && \
 RUN apt-get update && apt-get install -y libzmq5 libzmq3-dev libprotobuf-dev protobuf-compiler pkg-config
 
 ### ns3-gym
-ENV WORKSPACE=./usr/local/ns3_workspace
+ENV WORKSPACE=/usr/local/ns3_workspace
 RUN mkdir -p ${WORKSPACE}
 RUN cd ${WORKSPACE} && \
     wget https://www.nsnam.org/release/ns-allinone-3.40.tar.bz2 && \
