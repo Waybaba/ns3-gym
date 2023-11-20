@@ -120,16 +120,24 @@ RUN apt-get update && apt-get install -y libzmq5 libzmq3-dev libprotobuf-dev pro
 ### ns3-gym
 ENV WORKSPACE=/usr/local/ns3_workspace
 RUN mkdir -p ${WORKSPACE}
-RUN cd ${WORKSPACE} && \
-    wget https://www.nsnam.org/release/ns-allinone-3.40.tar.bz2 && \
-    tar xjf ns-allinone-3.40.tar.bz2 
+# RUN cd ${WORKSPACE} && \
+#     wget https://www.nsnam.org/release/ns-allinone-3.40.tar.bz2 && \
+#     tar xjf ns-allinone-3.40.tar.bz2 
     # (download
-RUN cd ${WORKSPACE}/ns-allinone-3.40/ns-3.40/contrib && \
+RUN git clone https://gitlab.com/nsnam/ns-3-dev.git && \
+    cd ns-3-dev \
+    git checkout ns-3.36
+# RUN cd ${WORKSPACE}/ns-allinone-3.40/ns-3.40/contrib && \
+#     git clone https://github.com/tkn-tub/ns3-gym.git ./opengym && \
+#     cd ${WORKSPACE}/ns-allinone-3.40/ns-3.40/contrib/opengym/ && \
+#     git checkout app-ns-3.36+
+    # (setup gym folder (need to to build ns3)
+RUN cd ${WORKSPACE}/ns-3-dev/contrib && \
     git clone https://github.com/tkn-tub/ns3-gym.git ./opengym && \
-    cd ${WORKSPACE}/ns-allinone-3.40/ns-3.40/contrib/opengym/ && \
+    cd ${WORKSPACE}/ns-3-dev/contrib/opengym/ && \
     git checkout app-ns-3.36+
     # (setup gym folder (need to to build ns3)
-RUN cd ${WORKSPACE}/ns-allinone-3.40/ns-3.40 && \
+RUN cd ${WORKSPACE}/ns-3-dev && \
     ./ns3 clean && ./ns3 configure --enable-examples && ./ns3 build
     # (build ns3
 RUN cd ${WORKSPACE}/ns-allinone-3.40/ns-3.40/contrib/opengym/ && \
