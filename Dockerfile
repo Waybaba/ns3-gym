@@ -132,16 +132,16 @@ RUN git clone https://gitlab.com/nsnam/ns-3-dev.git && \
 #     cd ${WORKSPACE}/ns-allinone-3.40/ns-3.40/contrib/opengym/ && \
 #     git checkout app-ns-3.36+
     # (setup gym folder (need to to build ns3)
-RUN cd ${WORKSPACE}/ns-3-dev/contrib && \
-    git clone https://github.com/tkn-tub/ns3-gym.git ./opengym && \
-    cd ${WORKSPACE}/ns-3-dev/contrib/opengym/ && \
-    git checkout app-ns-3.36+
+# RUN cd ${WORKSPACE}/ns-3-dev/contrib && \
+#     git clone https://github.com/tkn-tub/ns3-gym.git ./opengym && \
+#     cd ${WORKSPACE}/ns-3-dev/contrib/opengym/ && \
+#     git checkout app-ns-3.36+
     # (setup gym folder (need to to build ns3)
 RUN cd ${WORKSPACE}/ns-3-dev && \
     ./ns3 clean && ./ns3 configure --enable-examples && ./ns3 build
     # (build ns3
-RUN cd ${WORKSPACE}/ns-allinone-3.40/ns-3.40/contrib/opengym/ && \
-    pip3 install --user ./model/ns3gym
+# RUN cd ${WORKSPACE}/ns-allinone-3.40/ns-3.40/contrib/opengym/ && \
+#     pip3 install --user ./model/ns3gym
     # (build opengym
 
 ## Non-root user creation and enter
